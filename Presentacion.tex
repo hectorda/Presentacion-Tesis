@@ -34,21 +34,15 @@
 	\begin{enumerate}
 		\item Introducción.
 		\item Objetivos.
-		\item Desarrollo de Cliente Móvil en Android.
-		\item Diseño de una Arquitectura en Tiempo Real.
-		\item Evaluación de la Arquitectura Propuesta.
-		\item Conclusiones.
+		\item Diseño de la Solución (Hardware y Software).
+		\item Resultados
+		\item Conclusiones
 	\end{enumerate}
 %\tableofcontents
 \end{frame}
 
 
 \section{Introducción}
-\newtheorem{teo1-a}{Bio-Feedback Balance Postural}
-\newtheorem{teo1-b}{Sistema de Bio-feedback}
-\newtheorem{teo1-c}{Desarrollo Aplicación Escritorio}
-\newtheorem{teo1-d}{Resultados y Dificultades}
-
 \subsection{Bio-Feedback Balance Postural}
 \begin{frame}
 	\frametitle{Bio-Feedback Balance Postural}
@@ -65,32 +59,41 @@
 		\end{itemize}
 \end{frame}
 
-\subsection{Sistema de Bio-feedback}
+\subsection{Soluciones Presentes para el Estudio del Balance}
 \begin{frame}
-\frametitle{Sistema de Bio-feedback}
+	\frametitle{Soluciones Presentes para el Estudio del Balance}
+	\begin{minipage}[t]{0.48\linewidth}
+		\only<1->{\begin{figure}[H]
+				\centering
+				\subfigure{\includegraphics[scale=0.2]{img/BalanceSD.png}}
+				\caption{Balance SD}
+				\label{fig:balanceSD}
+			\end{figure}}
+		\end{minipage}
+		\hfill
+		\begin{minipage}[t]{0.48\linewidth}
+			\only<2->{\begin{figure}[H]
+					\flushleft
+					\subfigure{\includegraphics[scale=0.3]{img/kistlerFP.png}}
+					\caption{Kistler Force Plate}
+					\label{fig:Kistler}
+				\end{figure}}
+			\end{minipage}
+\end{frame}
+
+\subsection{Sistema de Bio-feedback Balance Postural}
+\begin{frame}
+	\frametitle{Sistema de Bio-feedback}
 	\begin{itemize}
-	 \item  Sistema de Bio-feedback para el Balance Postural.
+		\item  Sistema de Bio-feedback para el Balance Postural.
 	\end{itemize}
 	\begin{figure}
-			\centering
-			\subfigure{\includegraphics[scale=0.5,width=80mm]{img/diagrama_sistema}}
+		\centering
+		\subfigure{\includegraphics[scale=0.5,width=80mm]{img/diagrama_sistema}}
 		\label{fig:diagrama_sistema}
 	\end{figure}
 \end{frame}
 
-\subsection{Problema}
-\begin{frame}
-	\frametitle{Problema}
-		\only<1>{\begin{figure}[H]
-			\centering
-			\subfigure{\includegraphics[scale=0.5,width=82mm]{img/real_time_arch.png}}
-			\caption{Etapas de una Aplicación}
-			\label{fig:arquitectura_teoria}
-		\end{figure}}
-	\only<2>{\begin{teo1-c}
-	A medida que la concurrencia de usuarios aumenta, el tiempo de respuesta impide una entrega continua de los datos.
-	\end{teo1-c}}
-\end{frame}
 
 \section{Objetivos}
 \newtheorem{teo2-a}{Objetivo General}
@@ -116,45 +119,58 @@
 	\end{teo2-b}
 \end{frame}
 
-\section{Diseño del Dispositivo - Microcontrolador}
-\newtheorem{teo3-a}{Arquitectura presente en Agrosense}
-\newtheorem{teo3-b}{Integración de un cliente móvil}
 
-\subsection{Arquitectura presente en Agrosense}
+
+\section{Diseño del Dispositivo de Bio-feedback}
+\subsection{Hardware}
 \begin{frame}
-	\frametitle{Arquitectura presente en Agrosense}
-		\begin{figure}[H]
-					\centering
-					\subfigure{\includegraphics[scale=0.5,width=90mm]{img/arquipython.png}}
-					\caption{Etapas de Agrosense}
-					\label{fig:arquitecturaphyton}
-				\end{figure}
-\end{frame}
-\subsection{Integración de un cliente móvil}
-\begin{frame}
-	\frametitle{Integración de un cliente móvil}
+	\frametitle{Montaje sensores y programación en Arduino}
 		\begin{itemize}
-		\item<1->Consume datos del servidor.
-		\item<2->Serializa datos JSON para mostrarlos en pantalla.
+		\item<1->Conexión del Sensor MPU6050 con la placa Arduino.
+		\item<2->Establecer comunicación Sensor $\leftrightarrow$ Arduino ($I^2C$).
 		\end{itemize}
 	\begin{minipage}[t]{0.48\linewidth}
-			\only<3->{\begin{figure}[H]
-				\centering
-				\subfigure{\includegraphics[scale=2,width=55mm]{img/temp.png}}
-				%\caption{Página Web}
-				\label{fig:temp}
-			\end{figure}}
+		\only<3->{\begin{figure}[H]
+			\centering
+			\subfigure{\includegraphics[scale=0.3]{img/MPU6050.png}}
+			\label{fig:MPU6050}
+		\end{figure}}
 	\end{minipage}
 	\hfill
 	\begin{minipage}[t]{0.48\linewidth}
 		\only<4->{\begin{figure}[H]
 			\flushleft
-			\subfigure{\includegraphics[scale=0.5,width=25mm]{img/tempsoil.png}}
-			%\caption{Aplicación móvil}
-			\label{fig:tempsoil}
+			\subfigure{\includegraphics[scale=0.12]{img/conexionarduino.png}}
+			\label{fig:conexionArduino}
 		\end{figure}}
 	\end{minipage}
 \end{frame}
+
+\subsection{Software}
+\begin{frame}
+	\frametitle{Desarrollo de Sotware}
+	\begin{itemize}
+		\item<1->Establecer comunicación con el Micro-controlador Arduino (Serial).
+		\item<2->Obtención y filtrado de las variables cinemáticas.
+		\item<3->Despliegue en Tiempo real.
+	\end{itemize}
+	\begin{minipage}[t]{0.48\linewidth}
+		\only<4->{\begin{figure}[H]
+				\centering
+				\subfigure{\includegraphics[scale=0.3]{img/MPU6050.png}}
+				\label{fig:MPU6050}
+			\end{figure}}
+		\end{minipage}
+		\hfill
+		\begin{minipage}[t]{0.48\linewidth}
+			\only<5->{\begin{figure}[H]
+					\flushleft
+					\subfigure{\includegraphics[scale=0.12]{img/conexionarduino.png}}
+					\label{fig:conexionArduino}
+				\end{figure}}
+			\end{minipage}
+		\end{frame}
+
 
 \section{Diseño de una Arquitectura en Tiempo Real}
 \newtheorem{teo4-a}{Flujo de Datos: HTTP Polling}
@@ -215,12 +231,10 @@
 			\label{fig:arqui}
 		\end{figure}}
 \end{frame}
-\newtheorem{teo5-a}{Elección de la métrica adecuada}
-\newtheorem{teo5-b}{Elección del tipo de prueba y construcción de su ambiente}
-\newtheorem{teo5-c}{Resultados}
-\section{Evaluación de la Arquitectura Propuesta}
+
+\section{Evaluación de la Solución Propuesta}
 \begin{frame}
-	\frametitle{Evaluación de la arquitectura propuesta}
+	\frametitle{Evaluación de la Solución Propuesta}
 		\only<1-2>{
 			\begin{itemize}
 			\item Implementación de servidor HTTP Polling con el Framework Node.js. \pause
