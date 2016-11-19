@@ -1,0 +1,318 @@
+\documentclass{beamer}
+\mode<presentation>
+{
+	\usetheme{Warsaw}	
+	\usecolortheme{default}
+	\usecolortheme{orchid}
+}
+
+\usepackage[spanish]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{subfigure}
+\usepackage{float}
+\usepackage{verbatim}
+\usepackage{eso-pic}
+
+\usepackage{listings}
+\lstset{language=Java}
+\lstset{basicstyle=\small}
+\logo{\includegraphics[scale=0.5,width=30mm]{img/logo_UCM_calado_01.jpg}}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\title [Tesis]{Sistema de evaluación y Bio-Feedback para balance postural}
+\author[]{Héctor Gabriel Peredo Urbina\\
+\texttt{}}
+
+\date{Noviembre $2016$}
+
+\begin{document}
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Agenda}
+	\begin{enumerate}
+		\item Introducción.
+		\item Objetivos.
+		\item Desarrollo de Cliente Móvil en Android.
+		\item Diseño de una Arquitectura en Tiempo Real.
+		\item Evaluación de la Arquitectura Propuesta.
+		\item Conclusiones.
+	\end{enumerate}
+%\tableofcontents
+\end{frame}
+
+
+\section{Introducción}
+\newtheorem{teo1-a}{Bio-Feedback Balance Postural}
+\newtheorem{teo1-b}{Sistema de Bio-feedback}
+\newtheorem{teo1-c}{Desarrollo Aplicación Escritorio}
+\newtheorem{teo1-d}{Resultados y Dificultades}
+
+\subsection{Bio-Feedback Balance Postural}
+\begin{frame}
+	\frametitle{Bio-Feedback Balance Postural}
+		\textbf{Balance Postural}
+		\begin{itemize}			
+		\item<1->El mantener la posición bipeda-quieta. \pause
+		\item<2->Permanecer dentro de los limites de estabilidad  (\textit{Centro de masa}).
+		\end{itemize}
+		\textbf{Bio-Feedback}
+		\begin{itemize}
+		\item<3-> Obtener información de un ser vivo.				
+		\item<4-> Utilización Sensores.
+		\item<5-> Controlar o mejorar problemas.
+		\end{itemize}
+\end{frame}
+
+\subsection{Sistema de Bio-feedback}
+\begin{frame}
+\frametitle{Sistema de Bio-feedback}
+	\begin{itemize}
+	 \item  Sistema de Bio-feedback para el Balance Postural.
+	\end{itemize}
+	\begin{figure}
+			\centering
+			\subfigure{\includegraphics[scale=0.5,width=80mm]{img/diagrama_sistema}}
+		\label{fig:diagrama_sistema}
+	\end{figure}
+\end{frame}
+
+\subsection{Problema}
+\begin{frame}
+	\frametitle{Problema}
+		\only<1>{\begin{figure}[H]
+			\centering
+			\subfigure{\includegraphics[scale=0.5,width=82mm]{img/real_time_arch.png}}
+			\caption{Etapas de una Aplicación}
+			\label{fig:arquitectura_teoria}
+		\end{figure}}
+	\only<2>{\begin{teo1-c}
+	A medida que la concurrencia de usuarios aumenta, el tiempo de respuesta impide una entrega continua de los datos.
+	\end{teo1-c}}
+\end{frame}
+
+\section{Objetivos}
+\newtheorem{teo2-a}{Objetivo General}
+\newtheorem{teo2-b}{Objetivos Específicos}
+\subsection{Objetivo General}
+\begin{frame}
+	\frametitle{Objetivos General}
+	\begin{teo2-a}
+		Diseñar e implementar un prototipo de software-hardware basado en un microcontrolador Arduino y un sensor de velocidad angular y acelerometría de 3 ejes, para el registro y representación gráfica del centro de masa y bio-realimentación..
+	\end{teo2-a}	
+\end{frame}
+
+\subsection{Objetivos Específicos}
+\begin{frame}
+	\frametitle{Objetivos Específicos}
+	\begin{teo2-b}
+		\begin{itemize}
+		\small \item Integrar microcontrolador Arduino con sensor (giroscopio-acelerómetro).\pause
+	   	\item Diseñar sistema que permita el registro y visualización de todas las variables cinemáticas
+	   	(posición y velocidad angular) del centro de masa.\pause
+	   	\item Construcción de un sistema que facilite mediante bio-realimentación la posición del centro de presión (proyección del centro de masa).
+	   	\end{itemize}
+	\end{teo2-b}
+\end{frame}
+
+\section{Diseño del Dispositivo - Microcontrolador}
+\newtheorem{teo3-a}{Arquitectura presente en Agrosense}
+\newtheorem{teo3-b}{Integración de un cliente móvil}
+
+\subsection{Arquitectura presente en Agrosense}
+\begin{frame}
+	\frametitle{Arquitectura presente en Agrosense}
+		\begin{figure}[H]
+					\centering
+					\subfigure{\includegraphics[scale=0.5,width=90mm]{img/arquipython.png}}
+					\caption{Etapas de Agrosense}
+					\label{fig:arquitecturaphyton}
+				\end{figure}
+\end{frame}
+\subsection{Integración de un cliente móvil}
+\begin{frame}
+	\frametitle{Integración de un cliente móvil}
+		\begin{itemize}
+		\item<1->Consume datos del servidor.
+		\item<2->Serializa datos JSON para mostrarlos en pantalla.
+		\end{itemize}
+	\begin{minipage}[t]{0.48\linewidth}
+			\only<3->{\begin{figure}[H]
+				\centering
+				\subfigure{\includegraphics[scale=2,width=55mm]{img/temp.png}}
+				%\caption{Página Web}
+				\label{fig:temp}
+			\end{figure}}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[t]{0.48\linewidth}
+		\only<4->{\begin{figure}[H]
+			\flushleft
+			\subfigure{\includegraphics[scale=0.5,width=25mm]{img/tempsoil.png}}
+			%\caption{Aplicación móvil}
+			\label{fig:tempsoil}
+		\end{figure}}
+	\end{minipage}
+\end{frame}
+
+\section{Diseño de una Arquitectura en Tiempo Real}
+\newtheorem{teo4-a}{Flujo de Datos: HTTP Polling}
+\newtheorem{teo4-b}{Flujo de Datos: Websocket}
+\newtheorem{teo4-c}{Modificación de la etapa de Flujo de Datos}
+
+\subsection{Flujo de Datos: HTTP Polling}
+\begin{frame}
+	\frametitle{Flujo de Datos: HTTP Polling}
+	\begin{itemize}
+	\item<1-> El servidor no puede iniciar un canal de comunicación sin recibir una solicitud de un cliente.
+	\item<2-> Se envía una respuesta \textbf{``200 OK''} independiente del estado de la solicitud.
+	\item<3-> Desperdicia recursos a medida que las solicitudes aumentan.
+	\end{itemize}
+	\onslide<1->{\begin{figure}[H]
+		\centering
+		\subfigure{\includegraphics[scale=0.5,width=55mm]{img/polling.png}}
+		\caption{Esquema HTTP Polling}
+		\label{fig:httppolling}
+	\end{figure}}
+\end{frame}
+\subsection{Flujo de Datos: Websocket}
+\begin{frame}
+		\frametitle{Flujo de Datos: Websocket}
+		\begin{itemize}
+		\item<1-> Consiste en una apertura de un \textbf{Handshake}.
+		\item<2-> Mantiene una conexión Full-Duplex.
+		\item<3-> Se configura en base al entorno Web que usa generalmente
+		el paradigma solicitud/respuesta.
+		\end{itemize}
+		\onslide<1->{\begin{figure}[H]
+			\centering
+			\subfigure{\includegraphics[scale=0.5,width=65mm]{img/diagrama.png}}
+			\caption{Esquema Websocket}
+			\label{fig:websocket}
+		\end{figure}}
+\end{frame}
+\subsection{Modificación de la etapa de Flujo de Datos}
+\begin{frame}
+	\frametitle{Modificación de la etapa de Flujo de Datos}
+		\only<1-4>{\begin{minipage}[t]{0.48\linewidth}
+			\begin{itemize}
+			\item Presencia de una comunicación HTTP Polling en Agrosense.\pause
+			\item Aumento del tiempo de respuesta con alta concurrencia.\pause
+			\end{itemize}
+		\end{minipage}
+		\hfill
+		\begin{minipage}[t]{0.48\linewidth}
+		\begin{itemize}
+			\item Integración de Websocket en Flujo de Datos.\pause
+			\item Desarrollo de servidor con el Framework Node.js.\pause
+		\end{itemize}
+		\end{minipage}}
+		\only<1-5>{\begin{figure}[H]
+			\centering
+			\subfigure{\includegraphics[scale=0.5,width=95mm]{img/servidor_websoket.png}}
+			\caption{Flujo de Datos Websocket}
+			\label{fig:arqui}
+		\end{figure}}
+\end{frame}
+\newtheorem{teo5-a}{Elección de la métrica adecuada}
+\newtheorem{teo5-b}{Elección del tipo de prueba y construcción de su ambiente}
+\newtheorem{teo5-c}{Resultados}
+\section{Evaluación de la Arquitectura Propuesta}
+\begin{frame}
+	\frametitle{Evaluación de la arquitectura propuesta}
+		\only<1-2>{
+			\begin{itemize}
+			\item Implementación de servidor HTTP Polling con el Framework Node.js. \pause
+			\item Igualdad de condiciones en términos de lenguaje de programación.\pause
+			\end{itemize}}
+		\only<1-3>{\begin{figure}[H]
+			\centering
+			\subfigure{\includegraphics[scale=0.5,width=95mm]{img/arquinode.png}}
+			\caption{Flujo de Datos HTTP Polling}
+		\end{figure}}
+\end{frame}
+\subsection{Elección de la métrica adecuada}
+\begin{frame}
+	\frametitle{Elección de la métrica adecuada}
+			\begin{itemize}
+			\item Calcular el tiempo de respuesta frente a un alto número de peticiones. \pause
+			\item \alert{Promedio del tiempo de respuesta fijado en la duración de la experimentación que son cada 5 minutos}.\pause
+			\end{itemize}
+			\begin{minipage}[t]{0.48\linewidth}
+				\begin{figure}[H]
+					\centering
+					\subfigure{\includegraphics[scale=0.5,width=40mm]{img/metrica.png}}
+					%\caption{Cálculo del tiempo de respuesta de un cliente}
+					\end{figure}
+			\end{minipage}
+			\hfill
+			\begin{minipage}[t]{0.48\linewidth}
+			\begin{align}
+			P_{C} = \frac{(t_3 - t_2)}{t_{test}} \notag
+			\end{align}
+			\begin{itemize}
+			 \item Tiempo expresado en milisegundos.
+			\end{itemize}
+			\end{minipage}
+
+\end{frame}
+\subsection{Elección del tipo de prueba y construcción de su ambiente}
+\begin{frame}
+	\frametitle{Elección del tipo de prueba y construcción de su ambiente}
+	\begin{itemize}
+	\item<1-> \alert{Tipo de prueba:} Prueba de Carga. 
+		\begin{itemize}
+		\item<2-> Número esperado de usuarios concurrentes.
+		\item<3-> Realizan cantidades especificas de transacciones durante un tiempo.
+		\end{itemize}
+	\end{itemize}
+	\only<4->{\begin{figure}[H]
+		\subfigure{\includegraphics[scale=0.5,width=40mm]{img/environment.png}}
+		\caption{Estructura del Ambiente experimentación}
+	\end{figure}}
+\end{frame}
+\subsection{Resultados}
+\begin{frame}
+ \frametitle{Resultados}
+	\begin{figure}[H]
+		\flushleft
+		\subfigure{\includegraphics[scale=0.5,width=70mm]{img/promedio}}
+		%\caption{Prueba de carga a los dos servidores frente a diferentes concurrencias}
+	\end{figure}
+\end{frame}
+\section{Conclusiones}
+\newtheorem{teo6-a}{Conclusiones}
+\newtheorem{teo6-b}{Trabajos Futuros}
+\subsection{Conclusiones}
+\begin{frame}
+	\frametitle{Conclusiones}	
+	\begin{teo6-a}
+		\begin{itemize}
+			\item Los sensores inerciales montados en una placa Arduino genera resultados similares a una plataforma especializada en el estudio del Balance.\pause
+			\item El bajo coste de la solución propuesta.\pause
+			\item Los resultados expuestos son un buen punto de partida para nuevas investigaciones.			
+		\end{itemize}		
+	\end{teo6-a}
+\end{frame}
+
+\subsection{Trabajos Futuros}
+\begin{frame}
+	\frametitle{Trabajos Futuros}	
+	\begin{teo6-b}
+		Los trabajos futuros que pueden desprenderse de esta tesis son:\pause
+		\begin{itemize}
+			\item la validación de la solución como
+			un instrumento para el estudio del Balance. \pause
+			\item Añadir interfaces para comunicación inalámbrica.\pause
+			\item Mejora de algoritmos y sensores utilizados.\pause
+			\item Generar un sistema empaquetado.
+		\end{itemize}
+	\end{teo6-b}
+\end{frame}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\end{document}
