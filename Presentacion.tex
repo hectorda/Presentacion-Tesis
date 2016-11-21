@@ -34,7 +34,7 @@
 	\begin{enumerate}
 		\item Introducción.
 		\item Objetivos.
-		\item Diseño de la Solución (Hardware y Software).
+		\item Diseño del Sistema de Bio-feedback.
 		\item Resultados
 		\item Conclusiones
 	\end{enumerate}
@@ -54,7 +54,7 @@
 		\textbf{Bio-Feedback}
 		\begin{itemize}
 		\item<3-> Obtener información de un ser vivo.				
-		\item<4-> Utilización Sensores.
+		\item<4-> Mediante Sensores.
 		\item<5-> Controlar o mejorar problemas.
 		\end{itemize}
 \end{frame}
@@ -65,8 +65,9 @@
 	\begin{minipage}[t]{0.48\linewidth}
 		\only<1->{\begin{figure}[H]
 				\centering
-				\subfigure{\includegraphics[scale=0.2]{img/BalanceSD.png}}
-				\caption{Balance SD}
+				\subfigure{\includegraphics[scale=0.3]{img/kistlerFP.png}}
+				\caption{Kistler Force Plate}
+				
 				\label{fig:balanceSD}
 			\end{figure}}
 		\end{minipage}
@@ -74,8 +75,8 @@
 		\begin{minipage}[t]{0.48\linewidth}
 			\only<2->{\begin{figure}[H]
 					\flushleft
-					\subfigure{\includegraphics[scale=0.3]{img/kistlerFP.png}}
-					\caption{Kistler Force Plate}
+					\subfigure{\includegraphics[scale=0.2]{img/BalanceSD.png}}
+					\caption{Balance SD}
 					\label{fig:Kistler}
 				\end{figure}}
 			\end{minipage}
@@ -121,7 +122,7 @@
 
 
 
-\section{Diseño del Dispositivo de Bio-feedback}
+\section{Diseño del Sistema de Bio-feedback}
 \subsection{Hardware}
 \begin{frame}
 	\frametitle{Montaje sensores y programación en Arduino}
@@ -154,147 +155,70 @@
 		\item<2->Obtención y filtrado de las variables cinemáticas.
 		\item<3->Despliegue en Tiempo real.
 	\end{itemize}
-	\begin{minipage}[t]{0.48\linewidth}
-		\only<4->{\begin{figure}[H]
+	\only<4>{\begin{figure}[H]
+			\centering
+			\subfigure{\includegraphics[scale=0.3]{img/graficoPrincipal.png}}
+			\label{fig:graficoPrincipal}
+		\end{figure}}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Desarrollo de Sotware}
+	\begin{itemize}
+		\item<1->Análisis de la información.
+	\end{itemize}
+	\only<2>{\begin{figure}[H]
+			\centering
+			\subfigure{\includegraphics[scale=0.21]{img/analisisGraficos.png}}
+			\label{fig:analisisGraficos}
+		\end{figure}}
+\end{frame}
+
+
+\section{Resultados}
+\subsection{Evaluación de Algoritmos}
+\begin{frame}
+	\frametitle{Evaluación y comparación de algoritmos}
+		\begin{itemize}
+			\item<1->Algoritmos para cálculo de ángulo (Sin Filtro, Filtro  Complementario y Filtro Kalman).
+			\item<2->Algoritmos de obtención del desplazamiento (Recorrido Curvo y Proyección) 
+		\end{itemize}
+		\begin{minipage}[t]{0.48\linewidth}
+			\only<3->{\begin{figure}[H]
 				\centering
-				\subfigure{\includegraphics[scale=0.3]{img/MPU6050.png}}
-				\label{fig:MPU6050}
+				\subfigure{\includegraphics[scale=0.35]{img/angKalCom.png}}
+				%\caption{Cálculo del tiempo de respuesta de un cliente}
 			\end{figure}}
 		\end{minipage}
-		\hfill
 		\begin{minipage}[t]{0.48\linewidth}
-			\only<5->{\begin{figure}[H]
-					\flushleft
-					\subfigure{\includegraphics[scale=0.12]{img/conexionarduino.png}}
-					\label{fig:conexionArduino}
+			\only<3->{\begin{figure}[H]
+					\centering
+					\subfigure{\includegraphics[scale=0.28]{img/DiferenciaRec-Pro.png}}
+					%\caption{Cálculo del tiempo de respuesta de un cliente}
 				\end{figure}}
 			\end{minipage}
-		\end{frame}
-
-
-\section{Diseño de una Arquitectura en Tiempo Real}
-\newtheorem{teo4-a}{Flujo de Datos: HTTP Polling}
-\newtheorem{teo4-b}{Flujo de Datos: Websocket}
-\newtheorem{teo4-c}{Modificación de la etapa de Flujo de Datos}
-
-\subsection{Flujo de Datos: HTTP Polling}
-\begin{frame}
-	\frametitle{Flujo de Datos: HTTP Polling}
-	\begin{itemize}
-	\item<1-> El servidor no puede iniciar un canal de comunicación sin recibir una solicitud de un cliente.
-	\item<2-> Se envía una respuesta \textbf{``200 OK''} independiente del estado de la solicitud.
-	\item<3-> Desperdicia recursos a medida que las solicitudes aumentan.
-	\end{itemize}
-	\onslide<1->{\begin{figure}[H]
-		\centering
-		\subfigure{\includegraphics[scale=0.5,width=55mm]{img/polling.png}}
-		\caption{Esquema HTTP Polling}
-		\label{fig:httppolling}
-	\end{figure}}
 \end{frame}
-\subsection{Flujo de Datos: Websocket}
-\begin{frame}
-		\frametitle{Flujo de Datos: Websocket}
-		\begin{itemize}
-		\item<1-> Consiste en una apertura de un \textbf{Handshake}.
-		\item<2-> Mantiene una conexión Full-Duplex.
-		\item<3-> Se configura en base al entorno Web que usa generalmente
-		el paradigma solicitud/respuesta.
-		\end{itemize}
-		\onslide<1->{\begin{figure}[H]
-			\centering
-			\subfigure{\includegraphics[scale=0.5,width=65mm]{img/diagrama.png}}
-			\caption{Esquema Websocket}
-			\label{fig:websocket}
-		\end{figure}}
-\end{frame}
-\subsection{Modificación de la etapa de Flujo de Datos}
-\begin{frame}
-	\frametitle{Modificación de la etapa de Flujo de Datos}
-		\only<1-4>{\begin{minipage}[t]{0.48\linewidth}
-			\begin{itemize}
-			\item Presencia de una comunicación HTTP Polling en Agrosense.\pause
-			\item Aumento del tiempo de respuesta con alta concurrencia.\pause
-			\end{itemize}
-		\end{minipage}
-		\hfill
-		\begin{minipage}[t]{0.48\linewidth}
-		\begin{itemize}
-			\item Integración de Websocket en Flujo de Datos.\pause
-			\item Desarrollo de servidor con el Framework Node.js.\pause
-		\end{itemize}
-		\end{minipage}}
-		\only<1-5>{\begin{figure}[H]
-			\centering
-			\subfigure{\includegraphics[scale=0.5,width=95mm]{img/servidor_websoket.png}}
-			\caption{Flujo de Datos Websocket}
-			\label{fig:arqui}
-		\end{figure}}
-\end{frame}
-
-\section{Evaluación de la Solución Propuesta}
+		
 \begin{frame}
 	\frametitle{Evaluación de la Solución Propuesta}
 		\only<1-2>{
 			\begin{itemize}
-			\item Implementación de servidor HTTP Polling con el Framework Node.js. \pause
-			\item Igualdad de condiciones en términos de lenguaje de programación.\pause
+			\item Obtención del desplazamiento Centro de Masa usando Dispositivo de Bio-feedback. \pause
+			\item Contraste entre Kistler y Dispositivo.\pause
 			\end{itemize}}
 		\only<1-3>{\begin{figure}[H]
 			\centering
-			\subfigure{\includegraphics[scale=0.5,width=95mm]{img/arquinode.png}}
-			\caption{Flujo de Datos HTTP Polling}
+			\subfigure{\includegraphics[scale=0.5]{img/Antero-Posterior.png}}
+			\caption{Comparativa Kistler vs Dispositivo}
 		\end{figure}}
+		
+		\only<1-4>{	\begin{figure}[H]
+				\centering
+				\includegraphics[scale=0.285]{img/tablaResultados.png}
+				\caption{Tabla resumen resultados}
+			\end{figure}}
 \end{frame}
-\subsection{Elección de la métrica adecuada}
-\begin{frame}
-	\frametitle{Elección de la métrica adecuada}
-			\begin{itemize}
-			\item Calcular el tiempo de respuesta frente a un alto número de peticiones. \pause
-			\item \alert{Promedio del tiempo de respuesta fijado en la duración de la experimentación que son cada 5 minutos}.\pause
-			\end{itemize}
-			\begin{minipage}[t]{0.48\linewidth}
-				\begin{figure}[H]
-					\centering
-					\subfigure{\includegraphics[scale=0.5,width=40mm]{img/metrica.png}}
-					%\caption{Cálculo del tiempo de respuesta de un cliente}
-					\end{figure}
-			\end{minipage}
-			\hfill
-			\begin{minipage}[t]{0.48\linewidth}
-			\begin{align}
-			P_{C} = \frac{(t_3 - t_2)}{t_{test}} \notag
-			\end{align}
-			\begin{itemize}
-			 \item Tiempo expresado en milisegundos.
-			\end{itemize}
-			\end{minipage}
 
-\end{frame}
-\subsection{Elección del tipo de prueba y construcción de su ambiente}
-\begin{frame}
-	\frametitle{Elección del tipo de prueba y construcción de su ambiente}
-	\begin{itemize}
-	\item<1-> \alert{Tipo de prueba:} Prueba de Carga. 
-		\begin{itemize}
-		\item<2-> Número esperado de usuarios concurrentes.
-		\item<3-> Realizan cantidades especificas de transacciones durante un tiempo.
-		\end{itemize}
-	\end{itemize}
-	\only<4->{\begin{figure}[H]
-		\subfigure{\includegraphics[scale=0.5,width=40mm]{img/environment.png}}
-		\caption{Estructura del Ambiente experimentación}
-	\end{figure}}
-\end{frame}
-\subsection{Resultados}
-\begin{frame}
- \frametitle{Resultados}
-	\begin{figure}[H]
-		\flushleft
-		\subfigure{\includegraphics[scale=0.5,width=70mm]{img/promedio}}
-		%\caption{Prueba de carga a los dos servidores frente a diferentes concurrencias}
-	\end{figure}
-\end{frame}
 \section{Conclusiones}
 \newtheorem{teo6-a}{Conclusiones}
 \newtheorem{teo6-b}{Trabajos Futuros}
@@ -304,7 +228,7 @@
 	\begin{teo6-a}
 		\begin{itemize}
 			\item Los sensores inerciales montados en una placa Arduino genera resultados similares a una plataforma especializada en el estudio del Balance.\pause
-			\item El bajo coste de la solución propuesta.\pause
+			\item El bajo coste de la solución propuesta frente a las soluciones existentes.\pause
 			\item Los resultados expuestos son un buen punto de partida para nuevas investigaciones.			
 		\end{itemize}		
 	\end{teo6-a}
@@ -316,7 +240,7 @@
 	\begin{teo6-b}
 		Los trabajos futuros que pueden desprenderse de esta tesis son:\pause
 		\begin{itemize}
-			\item la validación de la solución como
+			\item Validación de la solución como
 			un instrumento para el estudio del Balance. \pause
 			\item Añadir interfaces para comunicación inalámbrica.\pause
 			\item Mejora de algoritmos y sensores utilizados.\pause
