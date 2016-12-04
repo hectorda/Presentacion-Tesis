@@ -18,11 +18,12 @@
 \lstset{basicstyle=\small}
 \logo{\includegraphics[scale=0.5,width=30mm]{img/logo_UCM_calado_01.jpg}}
 \setbeamertemplate{blocks}[rounded][shadow=true]
-\title [Tesis]{Sistema de evaluación y Bio-Feedback para balance postural}
-\author[]{Héctor Gabriel Peredo Urbina\\
+\title [Tesis]{Sistema de Evaluación y Bio-Feedback para Balance Postural}
+\author[Héctor Gabriel Peredo Urbina]{Héctor Gabriel Peredo Urbina\\
 \texttt{}}
 
-\date{Noviembre $2016$}
+
+\date{Diciembre $2016$}
 
 \begin{document}
 \begin{frame}
@@ -31,13 +32,8 @@
 
 \begin{frame}
 \frametitle{Agenda}
-	\begin{enumerate}
-		\item Introducción.
-		\item Objetivos.
-		\item Diseño del Sistema de Bio-feedback.
-		\item Resultados
-		\item Conclusiones
-	\end{enumerate}
+	\tableofcontents[hideallsubsections, pausesections]
+
 %\tableofcontents
 \end{frame}
 
@@ -46,24 +42,24 @@
 \subsection{Bio-Feedback Balance Postural}
 \begin{frame}
 	\frametitle{Bio-Feedback Balance Postural}
-		\textbf{Balance Postural}
-		\begin{itemize}			
-		\item<1->El mantener la posición bipeda-quieta. \pause
-		\item<2->Permanecer dentro de los limites de estabilidad  (\textit{Centro de masa}).
-		\end{itemize}
-		\textbf{Bio-Feedback}
-		\begin{itemize}
+		\only<2->{\textbf{Bio-Feedback}}
+		\begin{itemize}[<+->]
 		\item<3-> Obtener información de un ser vivo.				
-		\item<4-> Mediante Sensores.
-		\item<5-> Controlar o mejorar problemas.
+		\item<4-> Principalmente mediante sensores.
+		\item<5-> Controlar o mejorar funciones.
+		\end{itemize}
+		\only<2->{\textbf{Balance Postural}}
+		\begin{itemize}[<+->]			
+			\item<6-> El mantener la posición bipeda-quieta. \pause
+			\item<7-> Permanecer dentro de los limites de estabilidad  (\textit{Centro de masa}).
 		\end{itemize}
 \end{frame}
 
 \subsection{Soluciones Presentes para el Estudio del Balance}
 \begin{frame}
 	\frametitle{Soluciones Presentes para el Estudio del Balance}
-	\begin{minipage}[t]{0.48\linewidth}
-		\only<1->{\begin{figure}[H]
+	\pause \begin{minipage}[t]{0.48\linewidth}
+		{\begin{figure}[H]
 				\centering
 				\subfigure{\includegraphics[scale=0.3]{img/kistlerFP.png}}
 				\caption{Kistler Force Plate}
@@ -72,27 +68,29 @@
 			\end{figure}}
 		\end{minipage}
 		\hfill
-		\begin{minipage}[t]{0.48\linewidth}
-			\only<2->{\begin{figure}[H]
-					\flushleft
-					\subfigure{\includegraphics[scale=0.2]{img/BalanceSD.png}}
-					\caption{Balance SD}
-					\label{fig:Kistler}
-				\end{figure}}
+		\pause \begin{minipage}[t]{0.48\linewidth}
+			{\begin{figure}[H]
+				\centering
+				\subfigure{\includegraphics[scale=0.2]{img/BalanceSD.png}}
+				\caption{Balance SD}
+				\label{fig:Kistler}
+			\end{figure}}
 			\end{minipage}
 \end{frame}
 
-\subsection{Sistema de Bio-feedback Balance Postural}
+\subsection{Propuesta Sistema de Bio-feedback Balance Postural}
 \begin{frame}
-	\frametitle{Sistema de Bio-feedback}
+	\frametitle{Propuesta Sistema de Bio-feedback Balance Postural}
 	\begin{itemize}
-		\item  Sistema de Bio-feedback para el Balance Postural.
+		\item<2-> Sistema de Bio-feedback para el Balance Postural.
+		\item<3-> Arduino y Sensores Inerciales.
+		\item<4-> Sofware para control y registro.
 	\end{itemize}
-	\begin{figure}
-		\centering
+	\only<5-> {\begin{figure}
+		\flushleft
 		\subfigure{\includegraphics[scale=0.5,width=80mm]{img/diagrama_sistema}}
 		\label{fig:diagrama_sistema}
-	\end{figure}
+	\end{figure}}
 \end{frame}
 
 
@@ -125,13 +123,13 @@
 \section{Diseño del Sistema de Bio-feedback}
 \subsection{Hardware}
 \begin{frame}
-	\frametitle{Montaje sensores y programación en Arduino}
+	\frametitle{Diseño del Sistema de Bio-feedback - Hardware}
 		\begin{itemize}
-		\item<1->Conexión del Sensor MPU6050 con la placa Arduino.
-		\item<2->Establecer comunicación Sensor $\leftrightarrow$ Arduino ($I^2C$).
+		\item<2->Conexión del Sensor MPU6050 con la placa Arduino.
+		\item<3->Establecer comunicación Sensor $\leftrightarrow$ Arduino ($I^2C$).
 		\end{itemize}
 	\begin{minipage}[t]{0.48\linewidth}
-		\only<3->{\begin{figure}[H]
+		\only<4->{\begin{figure}[H]
 			\centering
 			\subfigure{\includegraphics[scale=0.3]{img/MPU6050.png}}
 			\label{fig:MPU6050}
@@ -139,7 +137,7 @@
 	\end{minipage}
 	\hfill
 	\begin{minipage}[t]{0.48\linewidth}
-		\only<4->{\begin{figure}[H]
+		\only<5->{\begin{figure}[H]
 			\flushleft
 			\subfigure{\includegraphics[scale=0.12]{img/conexionarduino.png}}
 			\label{fig:conexionArduino}
@@ -149,23 +147,23 @@
 
 \subsection{Software}
 \begin{frame}
-	\frametitle{Desarrollo de Sotware}
+	\frametitle{Diseño del Sistema de Bio-feedback - Sotware}
 	\begin{itemize}
-		\item<1->Establecer comunicación con el Micro-controlador Arduino (Serial).
-		\item<2->Obtención y filtrado de las variables cinemáticas.
-		\item<3->Despliegue en Tiempo real.
+		\item<2->Establecer comunicación con el Micro-controlador Arduino (Serial).
+		\item<3->Obtención y filtrado de las variables cinemáticas.
+		\item<4->Despliegue en Tiempo real.
 	\end{itemize}
-	\only<4>{\begin{figure}[H]
-			\centering
-			\subfigure{\includegraphics[scale=0.3]{img/graficoPrincipal.png}}
-			\label{fig:graficoPrincipal}
-		\end{figure}}
+	\only<5>{\begin{figure}[H]
+		\flushleft
+		\subfigure{\includegraphics[scale=0.26]{img/graficoPrincipal.png}}
+		\label{fig:graficoPrincipal}
+	\end{figure}}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Desarrollo de Sotware}
+	\frametitle{Diseño del Sistema de Bio-feedback - Sotware}
 	\begin{itemize}
-		\item<1->Análisis de la información.
+		\item<1->Despliegue y Herramientas de análisis.
 	\end{itemize}
 	\only<2>{\begin{figure}[H]
 			\centering
