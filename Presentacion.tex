@@ -42,45 +42,77 @@
 \subsection{Bio-Feedback Balance Postural}
 \begin{frame}
 	\frametitle{Bio-Feedback Balance Postural}
-		\only<2->{\textbf{Bio-Feedback}}
+		\only<2->{\textbf{Contexto Problema\\}}
+		\only<3->{\textbf{Balance Postural}}
 		\begin{itemize}[<+->]
-		\item<3-> Obtener información de un ser vivo.				
-		\item<4-> Principalmente mediante sensores.
-		\item<5-> Controlar o mejorar funciones.
+ 			\item<4-> El mantener la posición bipeda-quieta. \pause
+			\item<5-> Permanecer dentro de los limites de estabilidad  (\textit{Centro de masa}).
+			\item<6-> Estabilometría.
 		\end{itemize}
-		\only<2->{\textbf{Balance Postural}}
-		\begin{itemize}[<+->]			
-			\item<6-> El mantener la posición bipeda-quieta. \pause
-			\item<7-> Permanecer dentro de los limites de estabilidad  (\textit{Centro de masa}).
-		\end{itemize}
+		\only<3->{\textbf{Bio-Feedback}
+			\begin{itemize}[<+->]
+				\item<7-> Obtener información de un ser vivo.				
+				\item<8-> Registra principalmente mediante sensores.
+				\item<9-> Representar en tiempo real.
+			\end{itemize}}
+	
+	
+\end{frame}
+
+\subsection{Estudio Balance}
+\begin{frame}
+	\frametitle{Estudio Balance}
+	\noindent
+	\begin{minipage}[t]{0.48\linewidth}
+		\only<1->{\textbf{Estabilometría COM y COP}} 	
+		\only<2->{\begin{figure}[H]
+			\subfigure{\includegraphics[scale=0.4]{img/test-stabilomety}}
+			\label{fig:test-stabilometry}
+		\end{figure}}
+	\end{minipage}%
+		\hfill
+	\begin{minipage}[t]{0.48\linewidth}
+		\only<3->{\textbf{Modelo Péndulo Invertido}}
+		\only<4->{\begin{figure}[H]
+			\centering
+			\subfigure{\includegraphics[scale=0.25]{img/inverted-pendulum}}
+			\label{fig:pendulo}
+		\end{figure}}
+	\end{minipage}
 \end{frame}
 
 \subsection{Soluciones Presentes para el Estudio del Balance}
 \begin{frame}
-	\frametitle{Soluciones Presentes para el Estudio del Balance}
-	\pause \begin{minipage}[t]{0.48\linewidth}
+	\frametitle{Soluciones para el Estudio del Balance}\pause \begin{minipage}[t]{0.3\linewidth}
 		{\begin{figure}[H]
 				\centering
-				\subfigure{\includegraphics[scale=0.3]{img/kistlerFP.png}}
-				\caption{Kistler Force Plate}
-				
+				\subfigure{\includegraphics[scale=0.31]{img/kistlerFP.png}}
+				\caption{Kistler FP}
 				\label{fig:balanceSD}
 			\end{figure}}
 		\end{minipage}
 		\hfill
-		\pause \begin{minipage}[t]{0.48\linewidth}
+		\pause \begin{minipage}[t]{0.3\linewidth}
 			{\begin{figure}[H]
-				\centering
-				\subfigure{\includegraphics[scale=0.2]{img/BalanceSD.png}}
-				\caption{Balance SD}
-				\label{fig:Kistler}
-			\end{figure}}
-			\end{minipage}
+					\centering
+					\subfigure{\includegraphics[scale=0.2]{img/BalanceSD.png}}
+					\caption{Balance SD}
+					\label{fig:Kistler}
+				\end{figure}}
+			\end{minipage}			
+			\pause \begin{minipage}[t]{0.3\linewidth}
+				{\begin{figure}[H]
+						\centering
+						\subfigure{\includegraphics[scale=0.29]{img/calculoCOP}}
+						\caption{Cálculo COP}
+						\label{fig:calculoCOP}
+					\end{figure}}
+				\end{minipage}
 \end{frame}
 
 \subsection{Propuesta Sistema de Bio-feedback Balance Postural}
 \begin{frame}
-	\frametitle{Propuesta Sistema de Bio-feedback Balance Postural}
+	\frametitle{Propuesta}
 	\begin{itemize}
 		\item<2-> Sistema de Bio-feedback para el Balance Postural.
 		\item<3-> Arduino y Sensores Inerciales.
@@ -101,7 +133,7 @@
 \begin{frame}
 	\frametitle{Objetivos General}
 	\begin{teo2-a}
-		Diseñar e implementar un prototipo de software-hardware basado en un microcontrolador Arduino y un sensor de velocidad angular y acelerometría de 3 ejes, para el registro y representación gráfica del centro de masa y bio-realimentación..
+		Diseñar e implementar un prototipo de software-hardware basado en un microcontrolador Arduino y un sensor de velocidad angular y acelerometría de 3 ejes, para el registro y representación gráfica del centro de masa y bio-realimentación.
 	\end{teo2-a}	
 \end{frame}
 
@@ -125,22 +157,22 @@
 \begin{frame}
 	\frametitle{Diseño del Sistema de Bio-feedback - Hardware}
 		\begin{itemize}
-		\item<2->Conexión del Sensor MPU6050 con la placa Arduino.
-		\item<3->Establecer comunicación Sensor $\leftrightarrow$ Arduino ($I^2C$).
+		\item<2->Conexión y comunicacón de sensor inerciales  $\leftrightarrow$ Arduino \only<3->{($I^2C$).}
+		\item<4->Obtención datos sensor MPU6050 (Acelerómetro y Giroscopio).
+		\item<5->Calibración (frecuencia de captura, rangos, filtros internos)
 		\end{itemize}
+		\begin{minipage}[t]{0.48\linewidth}
+			\only<3->{\begin{figure}[H]
+				\centering
+				\subfigure{\includegraphics[scale=0.18]{img/conexionarduino.png}}
+				\label{fig:conexionArduino}
+			\end{figure}}
+		\end{minipage}
 	\begin{minipage}[t]{0.48\linewidth}
 		\only<4->{\begin{figure}[H]
-			\centering
-			\subfigure{\includegraphics[scale=0.3]{img/MPU6050.png}}
-			\label{fig:MPU6050}
-		\end{figure}}
-	\end{minipage}
-	\hfill
-	\begin{minipage}[t]{0.48\linewidth}
-		\only<5->{\begin{figure}[H]
 			\flushleft
-			\subfigure{\includegraphics[scale=0.12]{img/conexionarduino.png}}
-			\label{fig:conexionArduino}
+			\subfigure{\includegraphics[scale=0.27]{img/MPU6050.png}}
+			\label{fig:MPU6050}
 		\end{figure}}
 	\end{minipage}
 \end{frame}
@@ -151,11 +183,11 @@
 	\begin{itemize}
 		\item<2->Establecer comunicación con el micro-controlador Arduino (Serial).
 		\item<3->Obtención y filtrado de las variables cinemáticas.
-		\item<4->Despliegue en tiempo real.
+		\item<4->Registro y visualizado en tiempo real.
 	\end{itemize}
 	\only<5>{\begin{figure}[H]
-		\flushleft
-		\subfigure{\includegraphics[scale=0.26]{img/graficoPrincipal.png}}
+		\centering
+		\subfigure{\includegraphics[scale=0.25]{img/graficoPrincipal.png}}
 		\label{fig:graficoPrincipal}
 	\end{figure}}
 \end{frame}
@@ -163,11 +195,11 @@
 \begin{frame}
 	\frametitle{Diseño del Sistema de Bio-feedback - Software}
 	\begin{itemize}
-		\item<1->Despliegue resultados y herramientas de análisis.
+		\item<2->Despliegue resultados y herramientas de análisis (OFFLINE).
 	\end{itemize}
 	\only<2>{\begin{figure}[H]
 			\centering
-			\subfigure{\includegraphics[scale=0.21]{img/analisisGraficos.png}}
+			\subfigure{\includegraphics[scale=0.2]{img/analisisGraficos.png}}
 			\label{fig:analisisGraficos}
 		\end{figure}}
 \end{frame}
@@ -178,43 +210,65 @@
 \begin{frame}
 	\frametitle{Evaluación y comparación de algoritmos}
 		\begin{itemize}
-			\item<1->Algoritmos para cálculo de ángulo (Sin Filtro, Filtro  Complementario y Filtro Kalman).
-			\item<2->Algoritmos de obtención del desplazamiento (Recorrido Curvo y Proyección) 
+			\item<2->Algoritmos para cálculo de ángulo (Sin Filtro, Filtro  Complementario y Filtro Kalman).
+			\item<3->Algoritmos de obtención del desplazamiento (Proyección y Recorrido Curvo).
 		\end{itemize}
-		\begin{minipage}[t]{0.48\linewidth}
-			\only<3->{\begin{figure}[H]
-				\centering
-				\subfigure{\includegraphics[scale=0.35]{img/angKalCom.png}}
-				%\caption{Cálculo del tiempo de respuesta de un cliente}
-			\end{figure}}
-		\end{minipage}
-		\begin{minipage}[t]{0.48\linewidth}
-			\only<3->{\begin{figure}[H]
-					\centering
-					\subfigure{\includegraphics[scale=0.28]{img/DiferenciaRec-Pro.png}}
-					%\caption{Cálculo del tiempo de respuesta de un cliente}
-				\end{figure}}
-			\end{minipage}
+		\only<2->{\begin{minipage}[t]{0.48\linewidth}
+			\begin{figure}[H]
+			\centering
+			\subfigure{\includegraphics[scale=0.37]{img/angKalCom.png}}
+			\end{figure}
+		\end{minipage}}
+		\only<3->{\begin{minipage}[t]{0.48\linewidth}
+			\begin{figure}[H]
+				\flushright
+				\subfigure{\includegraphics[scale=0.19]{img/calculodesplazamiento}}
+			\end{figure}
+		\end{minipage}}
+
+
 \end{frame}
 		
 \begin{frame}
 	\frametitle{Evaluación de la Solución Propuesta}
-		\only<1-2>{
-			\begin{itemize}
-			\item Obtención del desplazamiento Centro de Masa usando Dispositivo de Bio-feedback. \pause
-			\item Contraste entre Kistler y Dispositivo.\pause
-			\end{itemize}}
-		\only<1-3>{\begin{figure}[H]
+	\begin{itemize}
+		\item<1->Obtención del desplazamiento Centro de Masa usando Dispositivo de Bio-feedback. 
+		\item<2->Contraste entre Kistler y Dispositivo (COP vs COM).
+	\end{itemize}
+	\only<2->{
+		\begin{figure}[H]
+			\flushleft
+			\includegraphics[scale=0.32]{img/contraste_Kistler}
+		\end{figure}
+	}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Evaluación de la Solución Propuesta}
+	\only<1>{\begin{figure}[H]
+		\centering
+		\subfigure{\includegraphics[scale=0.5]{img/Antero-Posterior.png}}
+		\caption{Comparativa Kistler vs Dispositivo}
+	\end{figure}}
+	
+\end{frame}
+	
+\begin{frame}
+	\frametitle{Evaluación de la Solución Propuesta}
+	\only<1>{\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.285]{img/tablaResultados.png}
+		\caption{Tabla Resumen Resultados}
+	\end{figure}}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Evaluación de la Solución Propuesta}
+	\only<1>{\begin{figure}[H]
 			\centering
-			\subfigure{\includegraphics[scale=0.5]{img/Antero-Posterior.png}}
-			\caption{Comparativa Kistler vs Dispositivo}
+			\includegraphics[scale=0.285]{img/tablaResultados2.png}
+			\caption{Tabla Resumen Resultados}
 		\end{figure}}
-		
-		\only<1-4>{	\begin{figure}[H]
-				\centering
-				\includegraphics[scale=0.285]{img/tablaResultados.png}
-				\caption{Tabla resumen resultados}
-			\end{figure}}
 \end{frame}
 
 \section{Conclusiones}
@@ -225,7 +279,7 @@
 	\frametitle{Conclusiones}	
 	\begin{teo6-a}
 		\begin{itemize}
-			\item Los sensores inerciales montados en una placa Arduino genera resultados similares a una plataforma especializada en el estudio del Balance.\pause
+			\item Los sensores inerciales montados en una placa Arduino generan resultados similares a una plataforma especializada en el estudio del Balance.\pause
 			\item El bajo coste de la solución propuesta frente a las soluciones existentes.\pause
 			\item Los resultados expuestos son un buen punto de partida para nuevas investigaciones.			
 		\end{itemize}		
@@ -238,11 +292,10 @@
 	\begin{teo6-b}
 		Los trabajos futuros que pueden desprenderse de esta tesis son:\pause
 		\begin{itemize}
-			\item Validación de la solución como
-			un instrumento para el estudio del Balance. \pause
-			\item Añadir interfaces para comunicación inalámbrica.\pause
-			\item Mejora de algoritmos y sensores utilizados.\pause
-			\item Generar un sistema empaquetado.
+			\item<2-> Validación de la solución como
+			un instrumento para el estudio del Balance (ISPG).
+			\item<3-> Añadir interfaces para comunicación inalámbrica.
+			\item<4-> Mejora de algoritmos y sensores utilizados.
 		\end{itemize}
 	\end{teo6-b}
 \end{frame}
