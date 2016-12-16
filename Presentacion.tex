@@ -118,7 +118,7 @@
 	\begin{itemize}
 		\item<2-> Sistema de Bio-feedback para el Balance Postural.
 		\item<3-> Arduino y Sensores Inerciales.
-		\item<4-> Sofware para control y registro.
+		\item<4-> Sofware para registro y bio-realimentación (desplazamiento Centro de Masa).
 	\end{itemize}
 	\only<5-> {\begin{figure}
 		\flushleft
@@ -159,19 +159,19 @@
 \begin{frame}
 	\frametitle{Diseño del Sistema de Bio-feedback - Hardware}
 		\begin{itemize}
-		\item<2->Conexión y comunicacón de sensor inerciales  $\leftrightarrow$ Arduino \only<3->{($I^2C$).}
-		\item<4->Obtención datos sensor MPU6050 (Acelerómetro y Giroscopio).
-		\item<5->Calibración (frecuencia de captura, rangos, filtros internos)
+		\item<1->Conexión y comunicacón de sensor inerciales  $\leftrightarrow$ Arduino ($I^2C$).
+		\item<2->Obtención datos sensor MPU6050 (Acelerómetro y Giroscopio).
+		\item<3->Ajustes (frecuencia de captura, rangos, filtros internos)
 		\end{itemize}
 		\begin{minipage}[t]{0.48\linewidth}
-			\only<3->{\begin{figure}[H]
+			\only<1->{\begin{figure}[H]
 				\centering
 				\subfigure{\includegraphics[scale=0.18]{img/conexionarduino.png}}
 				\label{fig:conexionArduino}
 			\end{figure}}
 		\end{minipage}
 	\begin{minipage}[t]{0.48\linewidth}
-		\only<4->{\begin{figure}[H]
+		\only<2->{\begin{figure}[H]
 			\flushleft
 			\subfigure{\includegraphics[scale=0.27]{img/MPU6050.png}}
 			\label{fig:MPU6050}
@@ -184,7 +184,7 @@
 	\frametitle{Diseño del Sistema de Bio-feedback - Software}
 	\begin{itemize}
 		\item<2->Establecer comunicación con el micro-controlador Arduino (Serial).
-		\item<3->Obtención y filtrado de las variables cinemáticas.
+		\item<3->Obtención y filtrado de las variables cinemáticas: Ángulo y Desplazamiento.
 		\item<4->Registro y visualizado en tiempo real.
 	\end{itemize}
 	\only<5>{\begin{figure}[H]
